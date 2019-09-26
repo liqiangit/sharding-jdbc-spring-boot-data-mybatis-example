@@ -17,10 +17,8 @@
 
 package io.shardingjdbc.example.spring.boot.mybatis;
 
-import io.shardingjdbc.example.spring.boot.mybatis.service.DemoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SpringBootDataMybatisMain {

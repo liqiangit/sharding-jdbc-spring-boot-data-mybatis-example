@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.shardingjdbc.example.spring.boot.mybatis.repository.SettingRepository">
+  <resultMap id="BaseResultMap" type="io.shardingjdbc.example.spring.boot.mybatis.entity.Setting">
+    <id column="setting_key" jdbcType="VARCHAR" property="settingKey" />
+    <result column="setting_value" jdbcType="VARCHAR" property="settingValue" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    setting_key, setting_value, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cw_ge_setting
+    where setting_key = #{settingKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cw_ge_setting
+    where setting_key = #{settingKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="io.shardingjdbc.example.spring.boot.mybatis.entity.Setting">
+    insert into cw_ge_setting (setting_key, setting_value, remark
+      )
+    values (#{settingKey,jdbcType=VARCHAR}, #{settingValue,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.shardingjdbc.example.spring.boot.mybatis.entity.Setting">
+    insert into cw_ge_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="settingKey != null">
+        setting_key,
+      </if>
+      <if test="settingValue != null">
+        setting_value,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="settingKey != null">
+        #{settingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="settingValue != null">
+        #{settingValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.shardingjdbc.example.spring.boot.mybatis.entity.Setting">
+    update cw_ge_setting
+    <set>
+      <if test="settingValue != null">
+        setting_value = #{settingValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where setting_key = #{settingKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.shardingjdbc.example.spring.boot.mybatis.entity.Setting">
+    update cw_ge_setting
+    set setting_value = #{settingValue,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where setting_key = #{settingKey,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -19,8 +19,11 @@ package io.shardingjdbc.example.spring.boot.mybatis.service;
 
 import io.shardingjdbc.example.spring.boot.mybatis.entity.Order;
 import io.shardingjdbc.example.spring.boot.mybatis.entity.OrderItem;
+import io.shardingjdbc.example.spring.boot.mybatis.entity.Setting;
 import io.shardingjdbc.example.spring.boot.mybatis.repository.OrderItemRepository;
 import io.shardingjdbc.example.spring.boot.mybatis.repository.OrderRepository;
+import io.shardingjdbc.example.spring.boot.mybatis.repository.SettingRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +33,9 @@ import java.util.List;
 @Service
 public class DemoService {
 
+    @Resource
+    private SettingRepository settingRepository;
+    
     @Resource
     private OrderRepository orderRepository;
 
@@ -57,6 +63,10 @@ public class DemoService {
     public void save() {
         List<Long> orderIds = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
+        	Setting setting=new Setting();
+        	setting.setSettingKey(System.currentTimeMillis()+"");
+        	setting.setSettingValue("settingValue");
+        	settingRepository.insertSelective(setting);
             Order order = new Order();
             order.setUserId(52);
             order.setStatus("INSERT_TEST");
