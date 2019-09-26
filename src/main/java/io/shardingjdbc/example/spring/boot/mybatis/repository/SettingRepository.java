@@ -3,7 +3,7 @@ package io.shardingjdbc.example.spring.boot.mybatis.repository;
 import org.apache.ibatis.annotations.Mapper;
 
 import io.shardingjdbc.example.spring.boot.mybatis.entity.Setting;
-@Mapper
+//@Mapper
 public interface SettingRepository {
     int deleteByPrimaryKey(String settingKey);
 

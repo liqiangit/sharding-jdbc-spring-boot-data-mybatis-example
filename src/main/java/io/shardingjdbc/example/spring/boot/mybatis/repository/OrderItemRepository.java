@@ -22,7 +22,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
+//@Mapper
 public interface OrderItemRepository {
     
     void createIfNotExistsTable();
